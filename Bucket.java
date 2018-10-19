@@ -1,16 +1,17 @@
 
 import java.util.*;
 
-public class Bucket{
+public class Bucket implements Comparable<Bucket>{
 
   private static final int THRESHOLD = 70;
-
   private List<Vector> vectors;
-  private int hashNum;
+  private double hashNum;
+  private int numZerosBeforeFirstOne;
 
-  public Bucket(int hashNum){
+  public Bucket(double hashNum, int numZerosBeforeFirstOne){
     vectors = new ArrayList<>();
     this.hashNum = hashNum;
+    this.numZerosBeforeFirstOne = numZerosBeforeFirstOne;
   }
 
   public void addToBucket(Vector vector){
@@ -37,7 +38,18 @@ public class Bucket{
     return vectors;
   }
 
-  public int getHashNum(){
+  public double getHashNum(){
     return hashNum;
+  }
+  public int getNumZerosBeforeFirstOne(){
+    return numZerosBeforeFirstOne;
+  }
+
+  @Override
+  public int compareTo(Bucket that){
+    if(this.numZerosBeforeFirstOne == that.getNumZerosBeforeFirstOne()) return 0;
+    else if(this.numZerosBeforeFirstOne > that.getNumZerosBeforeFirstOne()) return -1;
+    else return 1;
+
   }
 }
