@@ -1,8 +1,7 @@
 
 public class Main{
   public static void main(String[] args){
-    Vector[] vectors = FileReader.readIn();
-
+    Vector[] vectors = ReadIn.readIn();
     int[] pair = MinHash.minHash(vectors);
 
     if(pair == null) System.out.println("Could not locate pair");
